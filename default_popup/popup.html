@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="game.css">
+	<style type="text/css">
+		th,
+		.vis>h4 {
+			font-size: 9pt;
+			text-align: left;
+			font-weight: 700;
+			background-color: #c1a264 !important;
+			background-image: url(https://dstr.innogamescdn.com/asset/8edf6f3/graphic/screen/tableheader_bg3.png);
+			background-repeat: repeat-x;
+			position: relative;
+			padding: 2px 3px;
+		}
+
+		.selectVillage {
+			padding-left: 3px;
+			max-width: 10px;
+		}
+
+		#tblUnits input[type=text] {
+			width: 50px;
+		}
+
+		.village_anchor {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		#errorMessage{
+			padding: 5px;
+			display: inline;
+			color: red;
+		}
+	</style>
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="popup.js"></script>
+</head>
+
+<body style="width:350px; margin:0">
+	<div class="content box-border red">
+		<input id="csrf" type="hidden" />
+		<input id="requestUrl" type="hidden" />
+		<input id="sourceVillage" type="hidden" />
+		<div class="top-left"></div>
+		<div class="top-right"></div>
+		<div class="middle-top"></div>
+		<div class="middle-bottom"></div>
+		<div class="middle"></div>
+		<div class="middle-left"></div>
+		<div class="middle-right"></div>
+		<div class="bottom-left"></div>
+		<div class="bottom-right"></div>
+		<div class="inner">
+
+			<table class="vis" id="player_info" width="100%">
+				<tbody>
+					<tr>
+						<th colspan="2">
+							<img src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/welcome/player_points.png"
+								style="vertical-align:middle; margin-bottom:1px;">
+							<span id="targetUserName"></span>
+						</th>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding: 0" id="embedmap_player" data-name="embedmap_player">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table id="villages_list" class="vis" width="100%">
+				<thead>
+					<tr>
+						<th style="width:10px; text-align:left">
+							<input id="selectAll" type="checkbox" />
+						</th>
+						<th width="180">Köyler (<count id="villageCount">0</count>)</th>
+						<th width="80">Koordinatlar</th>
+						<th>Puan</th>
+					</tr>
+				</thead>
+				<tbody id="villages">
+				</tbody>
+			</table>
+
+
+			<table id="tblUnits">
+				<tbody>
+					<tr>
+						<td valign="top">
+							<table class="vis" width="100%">
+								<tbody>
+									<tr>
+										<th>Piyade</th>
+									</tr>
+									<tr>
+										<td class="nowrap ">
+											<a href="#" class="unit_link" data-unit="spear"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_spear.png" title="Mızrakçı"
+													alt="" class=""></a>
+											<input id="unit_input_spear" autocomplete="off" name="spear" type="text" tabindex="1" value=""
+												class="unitsInput" data-all-count="9">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap ">
+											<a href="#" class="unit_link" data-unit="sword"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_sword.png"
+													title="Kılıç Ustası" alt="" class=""></a>
+											<input id="unit_input_sword" autocomplete="off" name="sword" type="text" tabindex="2" value=""
+												class="unitsInput" data-all-count="13">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="axe"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_axe.png" title="Baltacı"
+													alt="" class=""></a>
+											<input id="unit_input_axe" autocomplete="off" name="axe" type="text" tabindex="3" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="archer"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_archer.png" title="Okçu"
+													alt="" class=""></a>
+											<input id="unit_input_archer" autocomplete="off" name="archer" type="text" tabindex="4" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td valign="top">
+							<table class="vis" width="100%">
+								<tbody>
+									<tr>
+										<th>Atlılar</th>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="spy"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_spy.png" title="Casus"
+													alt="" class=""></a>
+											<input id="unit_input_spy" autocomplete="off" name="spy" type="text" tabindex="5" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="light"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_light.png"
+													title="Hafif atlı" alt="" class=""></a>
+											<input id="unit_input_light" autocomplete="off" name="light" type="text" tabindex="6" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="marcher"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_marcher.png"
+													title="Atlı okçu" alt="" class=""></a>
+											<input id="unit_input_marcher" autocomplete="off" name="marcher" type="text" tabindex="7" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="heavy"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_heavy.png"
+													title="Ağır atlı" alt="" class=""></a>
+											<input id="unit_input_heavy" autocomplete="off" name="heavy" type="text" tabindex="8" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td valign="top">
+							<table class="vis" width="100%">
+								<tbody>
+									<tr>
+										<th>Kuşatma silahları</th>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="ram"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_ram.png" title="Şahmerdan"
+													alt="" class=""></a>
+											<input id="unit_input_ram" autocomplete="off" name="ram" type="text" tabindex="9" value=""
+												class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+									<tr>
+										<td class="nowrap unit-input-faded">
+											<a href="#" class="unit_link" data-unit="catapult"><img
+													src="https://dstr.innogamescdn.com/asset/8edf6f3/graphic/unit/unit_catapult.png"
+													title="Mancınık" alt="" class=""></a>
+											<input id="unit_input_catapult" autocomplete="off" name="catapult" type="text" tabindex="10"
+												value="" class="unitsInput" data-all-count="0">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+
+			<div id="command_actions" class="target-select clearfix vis float_left">
+				<h4>Komut:</h4>
+
+				<table class="vis" style="width: 100%;margin-bottom: 3px;">
+					<tbody>
+						<tr>
+							<td>
+								<input id="singleAttack" tabindex="15" type="checkbox">
+								<label for="singleAttack">Tekli Saldırı Gönder</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="start_attack" tabindex="16" class="attack btn btn-attack btn-target-action" name="attack"
+									type="submit" value="Atak Başlat">
+							</td>
+						</tr>
+						<tr id="errorMessage">
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
