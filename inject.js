@@ -33,6 +33,7 @@ window.onload = function () {
   loadCss('general.css');
   loadCss('openFakeAttackPopup.css');
   
+  loadScript('sendAttack.js');
   loadScript('general.js');
   loadScript('menu.js');
   loadScript('openFakeAttackPopup.js');
