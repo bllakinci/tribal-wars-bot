@@ -15,10 +15,11 @@ body {
 
 p.description {
   margin: 5px 5px 5px 0;
+  font-size: 9.8px;
 }
 
 p.description.note {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
 }
 
@@ -79,7 +80,7 @@ p.description.note {
 
 .fake-attack-release img {
   margin-top: 10px;
-  width: 49%;
+  width: 100%;
 }
 
 /* width */
