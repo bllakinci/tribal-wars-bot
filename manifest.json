@@ -1,7 +1,7 @@
 {
 	"name": "Tribal Wars Multi Attack",
 	"description": "Allows you to easily fake attack with 100ms interval.",
-	"version": "2.0",
+	"version": "2.1",
 	"manifest_version": 2,
 	"browser_action": {
 		"default_popup": "default_popup/popup.html"
