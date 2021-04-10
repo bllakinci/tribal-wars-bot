@@ -6,6 +6,13 @@ function loadScript(scriptName, callback) {
   document.body.appendChild(scriptEl);
 }
 
+
+function loadGameScript(src) {
+  var scriptEl = document.createElement('script');
+  scriptEl.src = src;
+  document.body.appendChild(scriptEl);
+}
+
 function loadCss(cssName) {
   var cssEl = document.createElement('link');
   cssEl.type = "text/css";
@@ -15,21 +22,6 @@ function loadCss(cssName) {
 }
 
 window.onload = function () {
-  // console.clear();
-  // if (window.location.href.indexOf("screen=map") > -1) {
-  //   var villagesHiddenInput = document.createElement("input");
-  //   villagesHiddenInput.id = "villagesHiddenInput";
-  //   villagesHiddenInput.type = "hidden";
-  //   document.body.append(villagesHiddenInput);
-
-  //   var element = document.createElement("script");
-  //   element.text = "document.getElementById('villagesHiddenInput').value = JSON.stringify(TWMap.villages);";
-  //   document.head.append(element);
-
-  //   console.log(villagesHiddenInput.value);
-  // }
-
-
   loadCss('general.css');
   loadCss('openFakeAttackPopup.css');
 
@@ -37,6 +29,6 @@ window.onload = function () {
   loadScript('general.js');
   loadScript('menu.js');
   loadScript('openFakeAttackPopup.js');
-
-
+  //loadScript('autoclean.js');
+  loadScript('unit.js');
 }
