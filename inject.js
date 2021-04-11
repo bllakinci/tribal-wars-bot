@@ -30,5 +30,5 @@ window.onload = function () {
   loadScript('menu.js');
   loadScript('openFakeAttackPopup.js');
   //loadScript('autoclean.js');
-  loadScript('unit.js');
+  //loadScript('unit.js');
 }
