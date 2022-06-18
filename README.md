@@ -1,4 +1,5 @@
 Web Store Link:
+
 https://chrome.google.com/webstore/detail/tribal-wars-multi-attack/mcjhimnjljhghjojacbahmoooembdijp
 
 MIT License
