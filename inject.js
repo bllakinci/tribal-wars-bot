@@ -29,6 +29,7 @@ window.onload = function () {
   loadScript('general.js');
   loadScript('menu.js');
   loadScript('openFakeAttackPopup.js');
-  //loadScript('autoclean.js');
-  //loadScript('unit.js');
+  loadScript('setArrivalTime.js');
+  // loadScript('autoclean.js');
+  // loadScript('unit.js');
 }
